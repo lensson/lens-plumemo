@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+   <!-- directory where your local repository will be stored, by default <user.home>/.m2/repository,
+     but on unix you sure as hell do not want this on your 500MB-limited and networked home directory -->
+   <pluginGroups>
+      <pluginGroup>org.codehaus.sonar</pluginGroup>
+      <pluginGroup>org.codehaus.mojo</pluginGroup>
+      <pluginGroup>com.alcatel.axs.maven.plugins</pluginGroup>
+      <pluginGroup>com.alcatel.nmhn.maven.plugins</pluginGroup>
+      <pluginGroup>com.alcatel.axs.basic.fwk</pluginGroup>
+   </pluginGroups>
+
+   <proxies>
+      <proxy>
+         <id>optional</id>
+         <active>true</active>
+         <protocol>http</protocol>
+         <username></username>
+         <password></password>
+         <host>10.158.100.7</host>
+         <port>8080</port>
+         <nonProxyHosts>localhost|127.0.0.1</nonProxyHosts>
+      </proxy>
+      <proxy>
+         <id>optional2</id>
+         <active>true</active>
+         <protocol>http</protocol>
+         <username></username>
+         <password></password>
+         <host>10.158.100.6</host>
+         <port>8080</port>
+         <nonProxyHosts>localhost|127.0.0.1</nonProxyHosts>
+      </proxy>      
+   </proxies>
+
+   <mirrors>
+      <mirror>
+         <id>mavenproxy</id>
+         <mirrorOf>nexus</mirrorOf>
+         <!--<mirrorOf>*</mirrorOf>-->
+         <url>http://artifactory-espoo-fnms.int.net.nokia.com:80/artifactory/ams-nexus-remote/</url>
+         <name>Maven Proxy</name>
+      </mirror>
+      <mirror>
+         <id>google-maven-central</id>
+         <name>GCS Maven Central mirror Asia Pacific</name>
+         <url>https://maven-central-asia.storage-download.googleapis.com/maven2/</url>
+         <mirrorOf>central</mirrorOf>
+      </mirror>
+   </mirrors>
+   <profiles>
+      <profile>
+         <id>localrepos</id>
+         <pluginRepositories>
+            <pluginRepository>
+               <id>central</id>
+               <name>Internal Mirror of Central Plugins Repository</name>
+               <url>http://artifactory-espoo-fnms.int.net.nokia.com:80/artifactory/ams-nexus-remote/</url>
+            </pluginRepository>
+         </pluginRepositories>
+         <repositories>
+            <repository>
+               <id>nexus</id>
+               <name>ams-nexus-remote</name>
+               <snapshots>
+                  <enabled>true</enabled>
+               </snapshots>
+               <url>http://artifactory-espoo-fnms.int.net.nokia.com:80/artifactory/ams-nexus-remote/</url>
+            </repository>
+            <repository>
+               <id>artifactory</id>
+               <name>libs-snapshot-local</name>
+               <snapshots>
+                  <enabled>true</enabled>
+               </snapshots>
+               <url>http://artifactory-espoo-fnms.int.net.nokia.com:80/artifactory/libs-candidate-release</url>
+            </repository>
+            <repository>
+               <id>central</id>
+               <name>Default Repository</name>
+               <layout>default</layout>
+               <url>https://repo1.maven.org/maven2</url>
+               <releases>
+                  <enabled>false</enabled>
+               </releases>
+               <snapshots>
+                  <enabled>false</enabled>
+               </snapshots>
+            </repository>
+         </repositories>
+      </profile>
+   </profiles>
+   <activeProfiles>
+      <activeProfile>localrepos</activeProfile>
+   </activeProfiles>
+</settings>

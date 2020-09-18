@@ -18,7 +18,10 @@ public class ConfigCache {
         configCache.put(key, value);
     }
 
+
     public static String getConfig(String key) {
         return StringUtils.trim(configCache.get(key));
     }
+
+
 }

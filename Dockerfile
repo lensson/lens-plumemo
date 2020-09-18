@@ -21,10 +21,12 @@ EXPOSE 8086
 
 WORKDIR /
 
+RUN mkdir -p /root/.m2/
+RUN cp ./settings.xml /root/.m2/
 RUN /usr/local/maven/apache-maven-${MAVEN_VERSION}/bin/mvn clean package
 
 #将本地项目jar包拷贝到Docker容器中的位置
-RUN cp ./target/helloblog-v1.1.0.jar ./
+RUN cp ./target/plumemo-v1.2.0.jar ./
 
 RUN rm -rf target
 RUN rm -rf repository
@@ -36,4 +38,4 @@ RUN apk add --no-cache tzdata
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
 #开机启动
-ENTRYPOINT ["java","-jar","/helloblog-v1.1.0.jar"]
+ENTRYPOINT ["java","-jar","/plumemo-v1.2.0.jar"]

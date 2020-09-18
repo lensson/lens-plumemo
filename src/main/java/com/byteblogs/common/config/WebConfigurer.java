@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
+import java.nio.file.Paths;
+
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
 
@@ -27,6 +30,13 @@ public class WebConfigurer implements WebMvcConfigurer {
         } catch (Exception e) {
             defaultPath = ConstantsModels.getDefaultPath(ConfigCache.getConfig(Constants.DEFAULT_PATH));
         }
-        registry.addResourceHandler("/files/**").addResourceLocations("file:///" + defaultPath);
+        if(defaultPath.startsWith(File.separator)){
+            String dir = "file:" + Paths.get(defaultPath).toString() + File.separator;
+            registry.addResourceHandler("/files/**").addResourceLocations(dir);
+        }else{
+            String dir = "file:" + Paths.get(System.getProperty("user.home"),defaultPath).toString()+ File.separator;
+            registry.addResourceHandler("/files/**").addResourceLocations(dir);
+        }
+
     }
 }

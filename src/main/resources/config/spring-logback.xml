@@ -65,6 +65,8 @@
         </encoder>
     </appender>
 
+    <logger name="com.byteblogs" level="DEBUG"/>
+
     <!--MyBatis log configure-->
     <logger name="java.sql.Connection" level="DEBUG"/>
     <logger name="java.sql.Statement" level="DEBUG"/>
@@ -72,7 +74,7 @@
     <logger name="java.sql.ResultSet" level="DEBUG"/>
 
     <!-- 组件的日志输出：name：找到组件的父级包名，level：输出级别 -->
-    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework" level="DEBUG"/>
     <logger name="org.apache.http" level="WARN"/>
     <logger name="sun.rmi" level="WARN"/>
     <logger name="com.zaxxer" level="WARN"/>

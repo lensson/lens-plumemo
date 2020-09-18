@@ -52,7 +52,7 @@ public class Constants {
     public static final String DEFAULT_PATH = "default_path";
     public static final String DEFAULT_IMAGE_DOMAIN = "default_image_domain";
     public static final String WIN_DEFAULT_PATH="D:/plumemo/blog/";
-    public static final String OS_DEFAULT_PATH="/home/plumemo/blog/";
+    public static final String OS_DEFAULT_PATH="files/";
     public static final String FILE_URL = "/files/";
 
     // 七牛云配置

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 @Service
 public class DefaultUploadFileTemplateServiceImpl implements UploadFileTemplateService, InitializingBean {
@@ -24,13 +25,18 @@ public class DefaultUploadFileTemplateServiceImpl implements UploadFileTemplateS
     @Override
     public String doSaveFileStore(final MultipartFile file) {
         final String filePath = ConstantsModels.getDefaultPath(ConfigCache.getConfig(Constants.DEFAULT_PATH));
+        String dir = null;
+        if(filePath.startsWith(File.separator))
+            dir = Paths.get(filePath).toString()+ File.separator;
+        else
+            dir = Paths.get(System.getProperty("user.home"),filePath).toString()+ File.separator;
         final String fileName = FileUtil.createSingleFileName(file.getOriginalFilename());
         try {
-            final File destFile = new File(filePath);
+            final File destFile = new File(dir);
             if (!destFile.exists()) {
                 destFile.mkdirs();
             }
-            file.transferTo(new File(filePath + fileName));
+            file.transferTo(new File(dir + fileName));
         } catch (final IOException e) {
             e.printStackTrace();
         }
