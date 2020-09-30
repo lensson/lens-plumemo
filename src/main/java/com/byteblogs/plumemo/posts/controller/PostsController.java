@@ -36,6 +36,12 @@ public class PostsController {
         return postsService.getPostsList(postsVO);
     }
 
+    @OperateLog(module = "文章列表", code=OperateEnum.GET_POSTS_LIST)
+    @PostMapping("/posts/v1/list")
+    public Result<PostsVO> getPostsListByPost(@RequestBody PostsVO postsVO) {
+        return postsService.getPostsList(postsVO);
+    }
+
     @OperateLog(module = "权重列表", code=OperateEnum.GET_POSTS_LIST)
     @GetMapping("/weight/v1/list")
     public Result<PostsVO> getWeightList(PostsVO postsVO) {

@@ -4,10 +4,12 @@ import com.byteblogs.common.base.domain.Result;
 import com.byteblogs.plumemo.posts.domain.vo.PostsVO;
 import com.byteblogs.plumemo.posts.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/archive")
 public class ArchiveController {

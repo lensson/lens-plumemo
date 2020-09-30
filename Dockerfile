@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-MAINTAINER byteblogs@aliyun.com
+MAINTAINER lensson.zhen@gmail.com
 
 ADD . .
 
@@ -17,7 +17,7 @@ RUN tar -zxvf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     rm -fr apache-maven-${MAVEN_VERSION}-bin.tar.gz
 
 #对外暴漏的端口号
-EXPOSE 8086
+EXPOSE 9000
 
 WORKDIR /
 
@@ -26,7 +26,7 @@ RUN cp ./settings.xml /root/.m2/
 RUN /usr/local/maven/apache-maven-${MAVEN_VERSION}/bin/mvn clean package
 
 #将本地项目jar包拷贝到Docker容器中的位置
-RUN cp ./target/plumemo-v1.2.0.jar ./
+RUN cp ./target/lens-plumemo-v1.2.0.jar ./
 
 RUN rm -rf target
 RUN rm -rf repository
@@ -38,4 +38,4 @@ RUN apk add --no-cache tzdata
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
 #开机启动
-ENTRYPOINT ["java","-jar","/plumemo-v1.2.0.jar"]
+ENTRYPOINT ["java","-jar","/lens-plumemo-v1.2.0.jar"]
